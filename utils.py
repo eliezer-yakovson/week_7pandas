@@ -8,8 +8,7 @@ def changes_existing_columns(df):
     df = df.astype({"total_amount": "float","shipping_days": "int64","customer_age": "int64"})
     df["order_date"] = pd.to_datetime(df["order_date"]) 
 
-    df['items_html'] =df['items_html'].str.replace('<b>', ' ')
-    df['items_html'] =df['items_html'].str.replace('</b>', ' ')
+    df['items_html'] = df['items_html'].str.replace('<[^<]+?>', '', regex=True)
 
     df['coupon_used'] = df['coupon_used'].replace('','no_coupon')
 
